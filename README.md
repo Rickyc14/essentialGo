@@ -1,6 +1,24 @@
 # essentialGo
 Essential aspects of Go.<br><br>
 
+```go
+package main
+
+import (
+    "fmt"
+    "log"
+    "net/http"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
+}
+
+func main() {
+    http.HandleFunc("/", handler)
+    log.Fatal(http.ListenAndServe(":8080", nil))
+}
+```
 
 <hr>
 
@@ -66,6 +84,24 @@ type Request struct {
 ```go
 func ListenAndServe(addr string, handler Handler) error
 ```
+<hr>
+
+**net/url** => https://golang.org/pkg/net/url/
+
+```go
+type URL struct {
+    Scheme     string
+    Opaque     string    // encoded opaque data
+    User       *Userinfo // username and password information
+    Host       string    // host or host:port
+    Path       string    // path (relative paths may omit leading slash)
+    RawPath    string    // encoded path hint (see EscapedPath method); added in Go 1.5
+    ForceQuery bool      // append a query ('?') even if RawQuery is empty; added in Go 1.7
+    RawQuery   string    // encoded query values, without '?'
+    Fragment   string    // fragment for references, without '#'
+}
+```
+
 
 <hr>
 
