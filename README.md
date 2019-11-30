@@ -84,6 +84,27 @@ type Request struct {
 ```go
 func ListenAndServe(addr string, handler Handler) error
 ```
+
+> A Server defines parameters for running an HTTP server. The zero value for Server is a valid configuration
+
+```go
+type Server struct {
+    Addr    string  // TCP address to listen on, ":http" if empty
+    Handler Handler // handler to invoke, http.DefaultServeMux if nil
+    TLSConfig *tls.Config
+    ReadTimeout time.Duration
+    ReadHeaderTimeout time.Duration // Go 1.8
+    WriteTimeout time.Duration
+    IdleTimeout time.Duration // Go 1.8
+    MaxHeaderBytes int
+    TLSNextProto map[string]func(*Server, *tls.Conn, Handler) // Go 1.1
+    ConnState func(net.Conn, ConnState) // Go 1.3
+    ErrorLog *log.Logger // Go 1.3
+    BaseContext func(net.Listener) context.Context // Go 1.13
+    ConnContext func(ctx context.Context, c net.Conn) context.Context // Go 1.13
+}
+```
+
 <hr>
 
 **net/url** => https://golang.org/pkg/net/url/
@@ -101,7 +122,6 @@ type URL struct {
     Fragment   string    // fragment for references, without '#'
 }
 ```
-
 
 <hr>
 
