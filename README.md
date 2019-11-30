@@ -115,4 +115,22 @@ type URL struct {
 func (t *Template) ParseFiles(filenames ...string) (*Template, error)
 ```
 
+> Execute applies a parsed template to the specified data object, writing the output to wr. If an error occurs executing the template or writing its output, execution stops, but partial results may already have been written to the output writer. A template may be executed safely in parallel, although if parallel executions share a Writer the output may be interleaved. 
 
+```go
+func (t *Template) Execute(wr io.Writer, data interface{}) error
+```
+
+<hr>
+
+**io** => https://golang.org/pkg/io/
+
+> Writer is the interface that wraps the basic Write method.<br>
+Write writes len(p) bytes from p to the underlying data stream. It returns the number of bytes written from p (0 <= n <= len(p)) and any error encountered that caused the write to stop early. Write must return a non-nil error if it returns n < len(p). Write must not modify the slice data, even temporarily.<br>
+Implementations must not retain p.
+
+```go
+type Writer interface {
+    Write(p []byte) (n int, err error)
+}
+```
