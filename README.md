@@ -105,6 +105,11 @@ type Server struct {
 }
 ```
 
+> ListenAndServe listens on the TCP network address srv.Addr and then calls Serve to handle requests on incoming connections. Accepted connections are configured to enable TCP keep-alives. 
+```go
+func (srv *Server) ListenAndServe() error
+```
+
 <hr>
 
 **net/url** => https://golang.org/pkg/net/url/
