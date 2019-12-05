@@ -19,6 +19,7 @@ func main() {
     log.Fatal(http.ListenAndServe(":8080", nil))
 }
 ```
+* A **handler** is an object that satisfies the `http.Handler` interface. This basically means that to be a handler an object must have a `ServeHTTP()` method with this exact signature: `ServeHTTP(http.ResponseWriter, *http.Request)`
 
 <hr>
 
@@ -35,6 +36,12 @@ https://golang.org/pkg/net/http/#Handler
 type Handler interface {
 	ServeHTTP(ResponseWriter, *Request)
 }
+```
+
+> Handle registers the handler for the given pattern. If a handler already exists for pattern, Handle panics. 
+
+```go
+func (mux *ServeMux) Handle(pattern string, handler Handler)
 ```
 
 > A ResponseWriter interface is used by an HTTP handler to construct an HTTP response.<br>
